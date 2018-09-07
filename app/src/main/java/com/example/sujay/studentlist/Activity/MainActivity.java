@@ -1,15 +1,27 @@
-package com.example.sujay.studentlist;
+package com.example.sujay.studentlist.Activity;
 
+import android.arch.persistence.room.Room;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.sujay.studentlist.Adapter.Recyclerview_Adapter;
+import com.example.sujay.studentlist.R;
+import com.example.sujay.studentlist.Utils.Student;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+    RecyclerView recyclerView;
+    Recyclerview_Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,10 +34,30 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                startActivity(new Intent(MainActivity.this,AddStudent.class));
             }
         });
+
+         recyclerView = findViewById(R.id.recyclerview);
+         recyclerView.hasFixedSize();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // Database
+        AppDatabase db = Room.databaseBuilder(MainActivity.this,AppDatabase.class,"StudentDatabase")
+                .allowMainThreadQueries()
+                .build();
+
+        List<Student> studentList = db.studentDao().getRecords();
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        adapter = new Recyclerview_Adapter(studentList,this);
+        recyclerView.setAdapter(adapter);
+
+
     }
 
     @Override
