@@ -65,7 +65,7 @@ public class Recyclerview_Adapter extends RecyclerView.Adapter<Recyclerview_Adap
                         .allowMainThreadQueries()
                         .build();
                 db.studentDao().deleteRecord(studentList.get(position));
-                db.notifyAll();
+
                 //Recyclerview_Adapter.this.notify();
                 Toast.makeText(context,"Student added Successfully ! ",Toast.LENGTH_SHORT).show();
 
