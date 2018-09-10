@@ -4,8 +4,10 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "students")
-public class Student {
+public class Student implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
@@ -23,6 +25,10 @@ public class Student {
         this.name = name;
         this.address = address;
         this.mobile_no = mobile_no;
+    }
+
+    public Student() {
+
     }
 
     public int getId() {

@@ -16,12 +16,11 @@ import com.example.sujay.studentlist.Adapter.Recyclerview_Adapter;
 import com.example.sujay.studentlist.R;
 import com.example.sujay.studentlist.Utils.Student;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
-    Recyclerview_Adapter adapter;
+     Recyclerview_Adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,AddStudent.class));
+                startActivity(new Intent(MainActivity.this,AddOrUpdateStudent.class));
             }
         });
 
